@@ -23,13 +23,17 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = SampleCommandLineStarter.class)
-public class H2SpringBootTest {
-	private Logger logger = LoggerFactory.getLogger(H2SpringBootTest.class);
+@WebAppConfiguration
+@IntegrationTest(value="server.port:0")
+public class H2SpringBootTestIT {
+	private Logger logger = LoggerFactory.getLogger(H2SpringBootTestIT.class);
 
 	@Autowired
 	private DummyTblDao dummyTblDao;

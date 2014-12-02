@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan
-public class Sample implements CommandLineRunner {
+public class SampleCommandLineStarter implements CommandLineRunner {
 
 	@Autowired
 	DummyTblDao dummyTblDao;
@@ -20,7 +20,7 @@ public class Sample implements CommandLineRunner {
 	PersonDao personDao;
 
 	public static void main(String[] args) {
-		SpringApplication.run(Sample.class, args);
+		SpringApplication.run(SampleCommandLineStarter.class, args);
 	}
 
 	public void run(String... args) {
