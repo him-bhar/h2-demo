@@ -15,29 +15,53 @@
  */
 package com.himanshu.poc.h2.springboot;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
+import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 @Configuration
 @EnableWebMvcSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
+	
+	@Autowired
+	private AuthenticationProviderImpl authenticationProviderImpl;
+	
+	/*@Bean
+	protected AbstractAuthenticationProcessingFilter getTokenAuthFilter() throws Exception {
+		UsernamePasswordAuthenticationFilter filter = new UsernamePasswordAuthenticationFilter();
+		filter.setAuthenticationManager(authenticationManagerBean());
+		return filter;
+	}*/
 
-	@Override
+	/*@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().regexMatchers("^/rest/.*").hasAnyRole("ADMIN")
 		.and().formLogin().loginPage("/login");
+		
+		http.regexMatcher("^/secure.*").addFilterAfter(getTokenAuthFilter(), BasicAuthenticationFilter.class)
+				.csrf().disable();
+	}*/
+	
+	protected void configure(HttpSecurity http) throws Exception {
+		http.antMatcher("/secure/**").authorizeRequests().anyRequest().authenticated().and().httpBasic();
 	}
 
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication().withUser("admin").password("admin")
+		/*auth.inMemoryAuthentication().withUser("admin").password("admin")
 				.roles("ADMIN", "USER").and().withUser("user").password("user")
-				.roles("USER");
+				.roles("USER");*/
+		auth.authenticationProvider(authenticationProviderImpl);
 	}
-
+	
 }

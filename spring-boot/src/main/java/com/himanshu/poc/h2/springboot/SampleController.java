@@ -22,21 +22,26 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/sample")
 public class SampleController {
 	
 	@Autowired
 	PersonDao personDao;
 	
-	@RequestMapping(method=RequestMethod.GET, value="/echo/{name}")
+	@RequestMapping(method=RequestMethod.GET, value="/sample/echo/{name}")
 	public String echoName(@PathVariable("name")String name) {
 		System.out.println("Name : "+name);
 		return "Hello "+name;
 	}
 	
-	@RequestMapping(method=RequestMethod.GET, value="/echo/all")
+	@RequestMapping(method=RequestMethod.GET, value="/sample/echo/all")
 	public String echoAllNames() {
 		System.out.println("personDao : "+personDao.getNames());
+		return "Hello "+personDao.getNames();
+	}
+	
+	@RequestMapping(method=RequestMethod.GET, value="/secure/sample/test")
+	public String echoSecureTest() {
+		System.out.println("Secure test");
 		return "Hello "+personDao.getNames();
 	}
 	
