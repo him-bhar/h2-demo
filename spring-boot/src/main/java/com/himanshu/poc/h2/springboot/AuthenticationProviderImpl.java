@@ -12,7 +12,7 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
-*/
+ */
 package com.himanshu.poc.h2.springboot;
 
 import java.util.HashMap;
@@ -26,35 +26,33 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AuthenticationProviderImpl implements AuthenticationProvider {
-	
-	private Map<String, String> dummyUsernamePwdMap = new HashMap<String, String>();
-	
-	{
-		dummyUsernamePwdMap.put("user", "user");
-		dummyUsernamePwdMap.put("admin", "admin");
-		dummyUsernamePwdMap.put("himanshu", "bhardwaj");
-	}
 
-	@Override
-	public Authentication authenticate(Authentication arg0)
-			throws AuthenticationException {
-		System.out.println(" User name is : "+arg0.getName());
-		//arg0.setAuthenticated(false);
-		//return arg0;
-		if (dummyUsernamePwdMap.get(arg0.getPrincipal()) != null 
-				&& dummyUsernamePwdMap.get(arg0.getPrincipal()).equals(arg0.getCredentials())) {
-			System.out.println("Auth success");
-			UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(arg0.getPrincipal(), arg0.getCredentials(), arg0.getAuthorities());
-			return token;
-		}
-		System.out.println("Auth failed");
-		return null;
-	}
+  private Map<String, String> dummyUsernamePwdMap = new HashMap<String, String>();
 
-	@Override
-	public boolean supports(Class<?> arg0) {
-		// TODO Auto-generated method stub
-		return true;
-	}
+  {
+    dummyUsernamePwdMap.put("user", "user");
+    dummyUsernamePwdMap.put("admin", "admin");
+    dummyUsernamePwdMap.put("himanshu", "bhardwaj");
+  }
+
+  @Override
+  public Authentication authenticate(Authentication arg0) throws AuthenticationException {
+    System.out.println(" User name is : " + arg0.getName());
+    // arg0.setAuthenticated(false);
+    // return arg0;
+    if (dummyUsernamePwdMap.get(arg0.getPrincipal()) != null && dummyUsernamePwdMap.get(arg0.getPrincipal()).equals(arg0.getCredentials())) {
+      System.out.println("Auth success");
+      UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(arg0.getPrincipal(), arg0.getCredentials(), arg0.getAuthorities());
+      return token;
+    }
+    System.out.println("Auth failed");
+    return null;
+  }
+
+  @Override
+  public boolean supports(Class<?> arg0) {
+    // TODO Auto-generated method stub
+    return true;
+  }
 
 }

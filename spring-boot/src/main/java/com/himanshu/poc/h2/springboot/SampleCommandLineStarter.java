@@ -13,18 +13,18 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan
 public class SampleCommandLineStarter implements CommandLineRunner {
 
-	@Autowired
-	DummyTblDao dummyTblDao;
-	
-	@Autowired
-	PersonDao personDao;
+  @Autowired
+  DummyTblDao dummyTblDao;
 
-	public static void main(String[] args) {
-		SpringApplication.run(SampleCommandLineStarter.class, args);
-	}
+  @Autowired
+  PersonDao personDao;
 
-	public void run(String... args) {
-		System.out.println(personDao.getNames());
-		System.out.println(dummyTblDao.getNames());
-	}
+  public static void main(String[] args) {
+    SpringApplication.run(SampleCommandLineStarter.class, args);
+  }
+
+  public void run(String... args) {
+    System.out.println(personDao.getNames());
+    System.out.println(dummyTblDao.getNames());
+  }
 }

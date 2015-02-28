@@ -29,32 +29,32 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = SampleCommandLineStarter.class)
 public class H2SpringBootTest {
-	private Logger logger = LoggerFactory.getLogger(H2SpringBootTest.class);
+  private Logger logger = LoggerFactory.getLogger(H2SpringBootTest.class);
 
-	@Autowired
-	private DummyTblDao dummyTblDao;
+  @Autowired
+  private DummyTblDao dummyTblDao;
 
-	@Autowired
-	private PersonDao personDao;
+  @Autowired
+  private PersonDao personDao;
 
-	@Test
-	public void testDummyTableDao() {
-		logger.info("dummyTblDao " + dummyTblDao);
-		Assert.assertNotNull(dummyTblDao);
-		List<String> names = dummyTblDao.getNames();
-		Assert.assertNotNull(names);
-		Assert.assertTrue(names.size() == 3);
-		logger.info(names.toString());
-	}
+  @Test
+  public void testDummyTableDao() {
+    logger.info("dummyTblDao " + dummyTblDao);
+    Assert.assertNotNull(dummyTblDao);
+    List<String> names = dummyTblDao.getNames();
+    Assert.assertNotNull(names);
+    Assert.assertTrue(names.size() == 3);
+    logger.info(names.toString());
+  }
 
-	@Test
-	public void testPersonDao() {
-		logger.info("personDao " + personDao);
-		Assert.assertNotNull(personDao);
-		List<String> names = personDao.getNames();
-		Assert.assertNotNull(names);
-		Assert.assertTrue(names.size() == 3);
-		logger.info(names.toString());
-	}
+  @Test
+  public void testPersonDao() {
+    logger.info("personDao " + personDao);
+    Assert.assertNotNull(personDao);
+    List<String> names = personDao.getNames();
+    Assert.assertNotNull(names);
+    Assert.assertTrue(names.size() == 3);
+    logger.info(names.toString());
+  }
 
 }

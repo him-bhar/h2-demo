@@ -13,14 +13,14 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan
 public class SampleWebStarter {
 
-	@Autowired
-	DummyTblDao dummyTblDao;
-	
-	@Autowired
-	PersonDao personDao;
+  @Autowired
+  DummyTblDao dummyTblDao;
 
-	public static void main(String[] args) {
-		SpringApplication.run(SampleWebStarter.class, args);
-	}
-	
+  @Autowired
+  PersonDao personDao;
+
+  public static void main(String[] args) {
+    SpringApplication.run(SampleWebStarter.class, args);
+  }
+
 }

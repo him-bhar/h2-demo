@@ -31,34 +31,34 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = SampleCommandLineStarter.class)
 @WebAppConfiguration
-@IntegrationTest(value="server.port:0")
+@IntegrationTest(value = "saerver.port:0")
 public class H2SpringBootTestIT {
-	private Logger logger = LoggerFactory.getLogger(H2SpringBootTestIT.class);
+  private Logger logger = LoggerFactory.getLogger(H2SpringBootTestIT.class);
 
-	@Autowired
-	private DummyTblDao dummyTblDao;
+  @Autowired
+  private DummyTblDao dummyTblDao;
 
-	@Autowired
-	private PersonDao personDao;
+  @Autowired
+  private PersonDao personDao;
 
-	@Test
-	public void testDummyTableDao() {
-		logger.info("dummyTblDao " + dummyTblDao);
-		Assert.assertNotNull(dummyTblDao);
-		List<String> names = dummyTblDao.getNames();
-		Assert.assertNotNull(names);
-		Assert.assertTrue(names.size() == 3);
-		logger.info(names.toString());
-	}
+  @Test
+  public void testDummyTableDao() {
+    logger.info("dummyTblDao " + dummyTblDao);
+    Assert.assertNotNull(dummyTblDao);
+    List<String> names = dummyTblDao.getNames();
+    Assert.assertNotNull(names);
+    Assert.assertTrue(names.size() == 3);
+    logger.info(names.toString());
+  }
 
-	@Test
-	public void testPersonDao() {
-		logger.info("personDao " + personDao);
-		Assert.assertNotNull(personDao);
-		List<String> names = personDao.getNames();
-		Assert.assertNotNull(names);
-		Assert.assertTrue(names.size() == 3);
-		logger.info(names.toString());
-	}
+  @Test
+  public void testPersonDao() {
+    logger.info("personDao " + personDao);
+    Assert.assertNotNull(personDao);
+    List<String> names = personDao.getNames();
+    Assert.assertNotNull(names);
+    Assert.assertTrue(names.size() == 3);
+    logger.info(names.toString());
+  }
 
 }

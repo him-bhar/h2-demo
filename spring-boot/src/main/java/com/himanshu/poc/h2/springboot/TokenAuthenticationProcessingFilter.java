@@ -12,31 +12,27 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
-public class TokenAuthenticationProcessingFilter extends
-		AbstractAuthenticationProcessingFilter {
+public class TokenAuthenticationProcessingFilter extends AbstractAuthenticationProcessingFilter {
 
-	public TokenAuthenticationProcessingFilter(
-			RequestMatcher requiresAuthenticationRequestMatcher) {
-		super(requiresAuthenticationRequestMatcher);
-	}
+  public TokenAuthenticationProcessingFilter(RequestMatcher requiresAuthenticationRequestMatcher) {
+    super(requiresAuthenticationRequestMatcher);
+  }
 
-	@Override
-	public Authentication attemptAuthentication(HttpServletRequest request,
-			HttpServletResponse response) throws AuthenticationException,
-			IOException, ServletException {
-		Authentication auth = new TokenAuthentication("-1");
-		try {
-			Map<String, String[]> params = request.getParameterMap();
-			if (!params.isEmpty() && params.containsKey("auth_token")) {
-				String token = params.get("auth_token")[0];
-				if (token != null) {
-					auth = new TokenAuthentication(token);
-				}
-			}
-			return this.getAuthenticationManager().authenticate(auth);
-		} catch (AuthenticationException ae) {
-			unsuccessfulAuthentication(request, response, ae);
-		}
-		return auth;
-	}
+  @Override
+  public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
+    Authentication auth = new TokenAuthentication("-1");
+    try {
+      Map<String, String[]> params = request.getParameterMap();
+      if (!params.isEmpty() && params.containsKey("auth_token")) {
+        String token = params.get("auth_token")[0];
+        if (token != null) {
+          auth = new TokenAuthentication(token);
+        }
+      }
+      return this.getAuthenticationManager().authenticate(auth);
+    } catch (AuthenticationException ae) {
+      unsuccessfulAuthentication(request, response, ae);
+    }
+    return auth;
+  }
 }
